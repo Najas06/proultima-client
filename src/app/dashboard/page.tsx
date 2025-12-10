@@ -10,6 +10,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Box, Calendar } from "lucide-react";
 import RecentTable from "@/components/dashboard/RecentTable";
 import RecentTableComponent from "@/components/dashboard/RecentTable";
+import ProjectHistory from "@/components/dashboard/ProjectHistory";
 
 export default function Page() {
   return (
@@ -69,6 +70,8 @@ export default function Page() {
               </div>
               {/* Recent Table */}
               <RecentTableComponent />
+              {/* Project History  */}
+              <ProjectHistory/>
             </div>
           </div>
         </div>

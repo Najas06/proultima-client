@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Outfit, Source_Serif_4, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import { Toaster } from "sonner";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -25,6 +26,7 @@ export default function RootLayout({
         className={`${outfit.variable} font-serif antialiased`}
       >
         {children}
+        <Toaster />
       </body>
     </html>
   );

@@ -14,6 +14,7 @@ import {
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Badge } from "@/components/ui/badge";
 import {
   Table,
   TableBody,
@@ -26,50 +27,51 @@ import { IconReportSearch } from "@tabler/icons-react";
 
 type Product = {
   id: string;
-  name: string;
-  category: string;
-  price: number;
-  stock: number;
-  brand: string;
-  model: string;
-  weight: string;
-  color: string;
-  sku: string;
+  projectName: string;
+  assignedDate: string;
+  pmJob: string;
+  status: string;
 };
 
 const generateDummyData = (): Product[] => {
   return Array.from({ length: 40 }, (_, i) => ({
-    id: `P-${i + 1}`,
-    name: `Product ${i + 1}`,
-    category: ["Electronics", "Clothing", "Books", "Home"][i % 4],
-    price: parseFloat((Math.random() * 500).toFixed(2)),
-    stock: Math.floor(Math.random() * 100),
-    brand: ["Sony", "Samsung", "Apple", "Dell"][i % 4],
-    model: `Model-${1000 + i}`,
-    weight: `${Math.floor(Math.random() * 5) + 1} kg`,
-    color: ["Black", "White", "Gray"][i % 3],
-    sku: `SKU-${Math.floor(100000 + Math.random() * 900000)}`,
+    id: `PR-${i + 1}`,
+    projectName: `Project Name ${i + 1}`,
+    assignedDate: `2025-01-01`,
+    pmJob: `PM/Job ${i + 1}`,
+    status: ["Pending", "In Progress", "Completed"][i % 3],
   }));
 };
 
 const columns: ColumnDef<Product>[] = [
   { accessorKey: "id", header: "ID" },
-  { accessorKey: "name", header: "Name" },
-  { accessorKey: "category", header: "Category" },
-  { accessorKey: "brand", header: "Brand" },
-  { accessorKey: "model", header: "Model" },
-  { accessorKey: "color", header: "Color" },
-  { accessorKey: "weight", header: "Weight" },
+  { accessorKey: "projectName", header: "Project Name" },
+  { accessorKey: "assignedDate", header: "Assigned Date" },
+  { accessorKey: "pmJob", header: "PM/Job" },
   {
-    accessorKey: "price",
-    header: "Price",
+    accessorKey: "status",
+    header: "Status",
     cell: ({ row }) => {
-      const price = row.getValue("price") as number;
-      return `$${price.toFixed(2)}`;
+      const status = row.getValue("status") as string;
+      const getBadgeClass = (status: string) => {
+        if (status === "Pending") {
+          return "bg-yellow-500 text-white border-transparent";
+        }
+        if (status === "In Progress") {
+          return "bg-blue-500 text-white border-transparent";
+        }
+        if (status === "Completed") {
+          return "bg-secondary text-secondary-foreground border-transparent";
+        }
+        return "";
+      };
+      return (
+        <Badge className={getBadgeClass(status)}>
+          {status}
+        </Badge>
+      );
     },
   },
-  { accessorKey: "stock", header: "Stock" },
-  { accessorKey: "sku", header: "SKU" },
 ];
 
 export default function ProductTable() {
@@ -88,6 +90,7 @@ export default function ProductTable() {
       globalFilter,
       columnVisibility,
     },
+    onGlobalFilterChange: setGlobalFilter,
     onColumnVisibilityChange: setColumnVisibility,
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
@@ -96,7 +99,7 @@ export default function ProductTable() {
   });
 
   return (
-    <div className="min-h-screen flex items-center justify-center -mt-16">
+    <div className="min-h-screen flex items-center justify-center -mt-16 ">
       <div className="w-full  space-y-6">
         {/* Header & Search */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 max-sm:px-4 ">
@@ -115,7 +118,7 @@ export default function ProductTable() {
         </div>
 
         {/* Table */}
-        <div className="overflow-auto border border-gray-300 rounded">
+        <div className="overflow-auto border border-gray-300 rounded ">
           <Table className="w-full table-fixed text-sm text-black">
             <TableHeader className="bg-secondary/10 font-medium">
               {table.getHeaderGroups().map((headerGroup) => (
@@ -146,6 +149,7 @@ export default function ProductTable() {
                         {flexRender(
                           cell.column.columnDef.cell,
                           cell.getContext()
+                          
                         )}
                       </TableCell>
                     ))}
@@ -173,7 +177,7 @@ export default function ProductTable() {
           </span>
           <div className="space-x-2">
             <Button
-              variant="outline"
+              variant="default"
               size="sm"
               onClick={() => table.previousPage()}
               disabled={!table.getCanPreviousPage()}
@@ -182,7 +186,7 @@ export default function ProductTable() {
               Previous
             </Button>
             <Button
-              variant="outline"
+              variant="default"
               size="sm"
               onClick={() => table.nextPage()}
               disabled={!table.getCanNextPage()}

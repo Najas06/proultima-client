@@ -1,24 +1,13 @@
 import type { Metadata } from "next";
-import { Inter, Source_Serif_4, JetBrains_Mono } from "next/font/google";
+import { Outfit, Source_Serif_4, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({
+const outfit = Outfit({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-outfit",
   display: "swap",
 });
 
-const sourceSerif4 = Source_Serif_4({
-  subsets: ["latin"],
-  variable: "--font-source-serif",
-  display: "swap",
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-jetbrains-mono",
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   title: "Proultima Client",
@@ -33,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} ${sourceSerif4.variable} ${jetbrainsMono.variable} font-sans antialiased`}
+        className={`${outfit.variable} font-serif antialiased`}
       >
         {children}
       </body>

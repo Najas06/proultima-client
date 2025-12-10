@@ -18,5 +18,9 @@
     "lib": "@/lib",
     "hooks": "@/hooks"
   },
-  "registries": {}
+  "registries": {
+    "@coss": "https://coss.com/ui/r/{name}.json",
+    "@reui": "https://reui.io/r/{name}.json",
+    "@smoothui": "https://smoothui.dev/r/{name}.json"
+  }
 }

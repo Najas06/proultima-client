@@ -33,7 +33,31 @@ export default function BasicModal({
   const modalRef = useRef<HTMLDivElement>(
     null
   ) as React.RefObject<HTMLDivElement>;
-  useOnClickOutside(modalRef, () => onClose());
+  useOnClickOutside(modalRef, (e) => {
+    // Don't close if clicking on a Radix UI portal (like Select dropdown)
+    const target = e.target as HTMLElement;
+    
+    // Check if any Radix Select is currently open
+    const openSelect = document.querySelector('[data-radix-select-content][data-state="open"]');
+    if (openSelect) {
+      return;
+    }
+    
+    // Check for Radix UI portals and select content
+    if (
+      target.closest('[data-radix-portal]') ||
+      target.closest('[data-slot="select-content"]') ||
+      target.closest('[data-radix-select-content]') ||
+      target.closest('[data-radix-popper-content-wrapper]') ||
+      target.hasAttribute('data-radix-select-item') ||
+      target.closest('[role="listbox"]') ||
+      target.closest('[data-slot="select-item"]') ||
+      target.closest('[data-slot="select-content"]')
+    ) {
+      return;
+    }
+    onClose();
+  });
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {

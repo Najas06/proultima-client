@@ -99,7 +99,7 @@ export default function ProductTable() {
   });
 
   return (
-    <div className="min-h-screen flex items-center justify-center -mt-16">
+    <div className="min-h-screen flex items-center justify-center -mt-16 ">
       <div className="w-full  space-y-6">
         {/* Header & Search */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 max-sm:px-4 ">
@@ -118,7 +118,7 @@ export default function ProductTable() {
         </div>
 
         {/* Table */}
-        <div className="overflow-auto border border-gray-300 rounded">
+        <div className="overflow-auto border border-gray-300 rounded ">
           <Table className="w-full table-fixed text-sm text-black">
             <TableHeader className="bg-secondary/10 font-medium">
               {table.getHeaderGroups().map((headerGroup) => (

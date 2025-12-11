@@ -11,6 +11,7 @@ import { Box, Calendar } from "lucide-react";
 import RecentTable from "@/components/dashboard/RecentTable";
 import RecentTableComponent from "@/components/dashboard/RecentTable";
 import ProjectHistory from "@/components/dashboard/ProjectHistory";
+import FourGridCardsComponent from "@/components/dashboard/FourGridCardsComponent";
 
 export default function Page() {
   return (
@@ -72,6 +73,8 @@ export default function Page() {
               <RecentTableComponent />
               {/* Project History  */}
               <ProjectHistory/>
+              {/* meeting , request, quetories, raise */}
+              <FourGridCardsComponent/>
             </div>
           </div>
         </div>

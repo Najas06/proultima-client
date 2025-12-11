@@ -56,7 +56,7 @@ const ProjectAllocation = () => {
   };
 
   return (
-    <div>
+    <div className="z-[10] cursor-pointer">
       <Button onClick={() => setIsOpen(true)} variant="default">
         Project Allocation
       </Button>
